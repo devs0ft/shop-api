@@ -6,11 +6,12 @@ const Product = require('../models/products.model')
 //Creating product using the crud method
 const createProduct = async (req,res) =>{
    try {
+         // write to the database,.create is part of the mongoose method
        const product =await Product.create(req.body);
-       //always return status or error in json format
+       //always return status or response in json format
        res.status(201).json
    } catch (error) {
-       //error .message to know where the error happened
+       //when something happens,return error
        res.status(400).json({error:error.message})
    }
 }
@@ -31,7 +32,7 @@ const getAllProducts = async (req,res) =>{
 // step 11 Getting single product
 const getSingleProduct = async (req,res)=>{
     try {
-        // step 12 first get product id
+        // step 12 first get product id to query for the product.
         const productId = req.params.productId;
         // step 13 now get product from database
         const product = await Product.findById(productId)
